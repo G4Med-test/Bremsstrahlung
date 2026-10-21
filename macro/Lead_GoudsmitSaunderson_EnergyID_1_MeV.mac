@@ -1,0 +1,42 @@
+#
+# macro file for bremsstrahlung
+#
+/control/verbose 0
+/run/verbose 0
+
+#
+# define here the Scattering foil
+#
+/testem/det/setMaterial Lead 
+/testem/det/setThickness 0.60406 cm
+/testem/det/setRadius 1.583 cm
+/testem/det/setParameterA -3.313 cm
+/testem/det/setParameterB -3.3 cm
+/testem/det/setParameterC -2.915 cm
+/testem/det/setParameterD -2.9 cm
+/testem/det/setParameterE -1.6051 cm
+/testem/det/setParameterF -1.6 cm
+
+/testem/phys/addPhysics GoudsmitSaunderson 
+
+/run/initialize
+#/testem/stepMax 5 cm # From Ross, et. al. Med. Phys. 35
+/run/setCut 0.05 mm 
+/process/em/setSecBiasing eBrem split 100 10.09 MeV
+
+/gun/particle e- 
+/gun/energy 10.09 MeV
+
+/analysis/setFileName results/Lead_GoudsmitSaunderson_10dot09_MeV
+/analysis/h1/set 0 100   0.1   40 MeV none log
+/analysis/h1/set 1 100   0.1   40 MeV none log
+/analysis/h1/set 2 100   0.1   40 MeV none log
+/analysis/h1/set 3 100   0.1   40 MeV none log
+/analysis/h1/set 4 100   0.1   40 MeV none log
+/analysis/h1/set 5 100   0.1   40 MeV none log
+/analysis/h1/set 6 100   0.1   40 MeV none log
+/analysis/h1/set 7 100   0.1   40 MeV none log
+
+/run/printProgress 200000 
+/run/beamOn        2000000 
+

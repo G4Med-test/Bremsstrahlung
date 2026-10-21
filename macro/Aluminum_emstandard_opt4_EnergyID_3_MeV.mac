@@ -1,0 +1,42 @@
+#
+# macro file for bremsstrahlung
+#
+/control/verbose 0
+/run/verbose 0
+
+#
+# define here the Scattering foil
+#
+/testem/det/setMaterial Aluminum 
+/testem/det/setThickness 4.30900 cm
+/testem/det/setRadius 3.63 cm
+/testem/det/setParameterA -2.613 cm
+/testem/det/setParameterB -2.6 cm
+/testem/det/setParameterC -2.215 cm
+/testem/det/setParameterD -2.2 cm
+/testem/det/setParameterE -0.9051 cm
+/testem/det/setParameterF -0.9 cm
+
+/testem/phys/addPhysics emstandard_opt4 
+
+/run/initialize
+#/testem/stepMax 5 cm # From Ross, et. al. Med. Phys. 35
+/run/setCut 0.05 mm 
+/process/em/setSecBiasing eBrem split 100 20.28 MeV
+
+/gun/particle e- 
+/gun/energy 20.28 MeV
+
+/analysis/setFileName results/Aluminum_emstandard_opt4_20dot28_MeV
+/analysis/h1/set 0 100   0.1   40 MeV none log
+/analysis/h1/set 1 100   0.1   40 MeV none log
+/analysis/h1/set 2 100   0.1   40 MeV none log
+/analysis/h1/set 3 100   0.1   40 MeV none log
+/analysis/h1/set 4 100   0.1   40 MeV none log
+/analysis/h1/set 5 100   0.1   40 MeV none log
+/analysis/h1/set 6 100   0.1   40 MeV none log
+/analysis/h1/set 7 100   0.1   40 MeV none log
+
+/run/printProgress 200000 
+/run/beamOn        2000000 
+
